@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
 
   //####################################
 
-  // Uncomment to use the ADC class for reading IR sensor
+  // Uncomment to use the ADC class for reading IR sensoroilhkjjhkljhl
   // ADC adc;
 
 
