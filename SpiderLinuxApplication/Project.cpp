@@ -15,7 +15,7 @@
 
 int main(int argc, char *argv[]){
 
-  printf("===== Group <X> Final Project =====\r\n");
+  printf("===== Group 1 Final Project =====\r\n");
 
   //####################################
   /*
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
 
   //####################################
 
-  // Uncomment to use the ADC class for reading IR sensoroilhkjjhkljhl
+  // Uncomment to use the ADC class for reading IR sensor
   // ADC adc;
 
 
