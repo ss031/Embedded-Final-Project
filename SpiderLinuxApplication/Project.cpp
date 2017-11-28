@@ -15,7 +15,7 @@
 
 int main(int argc, char *argv[]){
 
-  printf("===== Group 1 Final Project =====\r\n");
+  printf("===== Group <X> Final Project =====\r\n");
 
   //####################################
   /*
@@ -25,22 +25,37 @@ int main(int argc, char *argv[]){
   //####################################
 
   // Spider class
-  CSpider Spider;
+  CSpider spider;
 
 	printf("Spider Init & Standup\r\n");
-	if (!Spider.Init()){
+	if (!spider.Init()){
 		printf("Spilder Init failed\r\n");
 	}else{
-		if (!Spider.Standup())
+		if (!spider.Standup())
 			printf("Spilder Standup failed\r\n");
 	}
-	Spider.SetSpeed(50);
+	spider.SetSpeed(50);
 
   //####################################
 
-  // Uncomment to use the ADC class for reading IR sensor
-  // ADC adc;
-
-
+  // Uncomment to use the ADC class for reading IR sensoroilhkjjhkljhl
+	ADC adc;
+	/* while (1) {
+		usleep(100000);
+		printf("dist: %d\n", adc.GetChannel(0));
+	} */
+	uint32_t channel = 0;
+	channel = adc.GetChannel(0);
+	printf("dist: %d\n", channel);
+	while (channel < 1200) {
+		spider.MoveForward(1);
+		//spider.Reset();
+		channel = adc.GetChannel(0);
+		printf("dist: %d\n", channel);
+		//usleep(1000000);
+	}
+	spider.Reset();
+	spider.BodyUpDown(1);
+	spider.Reset();
 	return 0;
 }
