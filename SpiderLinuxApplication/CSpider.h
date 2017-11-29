@@ -78,6 +78,9 @@ public:
 	void Grab();
 
 	void SetJointPosition(int leg, int joint, int position);
+	
+	void MoveTripodSingleStep(TRIPOD_ID Tripod,CSpiderLeg::JOINT_ID Joint,float AngleF,float AngleM,float AngleB);
+	void testing(uint8_t Repeat_Num);
 
 
 };
