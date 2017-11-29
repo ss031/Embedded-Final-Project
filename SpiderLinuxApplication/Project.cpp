@@ -32,13 +32,13 @@ int main(int argc, char *argv[]){
 		printf("Spilder Init failed\r\n");
 	}else{
 		if (!spider.Standup())
-			printf("Spilder Standup failed\r\n");
+			printf("Spider Standup failed\r\n");
 	}
 	spider.SetSpeed(50);
 
   //####################################
 
-  // Uncomment to use the ADC class for reading IR sensoroilhkjjhkljhl
+  // Uncomment to use the ADC class for reading IR sensor
 	ADC adc;
 	/* while (1) {
 		usleep(100000);
