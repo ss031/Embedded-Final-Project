@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 		if (!spider.Standup())
 			printf("Spider Standup failed\r\n");
 	}
-	spider.SetSpeed(1000);
+	spider.SetSpeed(50);
 
 	//####################################
 	
@@ -44,9 +44,9 @@ int main(int argc, char *argv[]){
 		if(BUTTON_PIO.GetBUTTON()==0x2) {
 			
 			//uint32_t channel = adc.GetChannel(0);
-			//printf("dist: %d\n", channel);
+			////printf("dist: %d\n", channel);
 			//while (channel < 1000) {
-				spider.testing(5);
+				spider.testing(20);
 				//channel = adc.GetChannel(0);
 				//printf("dist: %d\n", channel);
 			//}
