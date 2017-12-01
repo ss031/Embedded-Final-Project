@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
 			
 			//uint32_t channel = adc.GetChannel(0);
 			////printf("dist: %d\n", channel);
-			//while (channel < 1000) {
+			///while (channel < 1000) {
 				spider.testing(20);
 				//channel = adc.GetChannel(0);
 				//printf("dist: %d\n", channel);
@@ -55,6 +55,7 @@ int main(int argc, char *argv[]){
 		
 		if (BUTTON_PIO.GetBUTTON()==0x1) {
 			spider.Reset();
+			spider.Fold();
 		}
 	}
 	
