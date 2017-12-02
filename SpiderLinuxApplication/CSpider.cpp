@@ -1039,7 +1039,7 @@ void CSpider::dp_testing(uint8_t Repeat_Num) {
 	for(num=0;num<Repeat_Num*2 && m_bAbort!= true;num++)
 	{
 		
-		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_up_offset, knee_base+knee_up_offset, knee_base+knee_up_offset);
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_up_offset+20, knee_base+knee_up_offset+20, knee_base+knee_up_offset+20);
 		WaitReady(ReadyTime());
 		
 		MoveTripod(first, CSpiderLeg::Hip, hipF_base+hip_forward_offset, hipM_base+hip_forward_offset, hipB_base+hip_forward_offset);
@@ -1049,7 +1049,7 @@ void CSpider::dp_testing(uint8_t Repeat_Num) {
 		MoveTripod(second, CSpiderLeg::Hip, hipF_base, hipM_base, hipB_base);
 		WaitReady(ReadyTime());
 		
-		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_down_offset, knee_base+knee_down_offset+MKnee_down_adjustment, knee_base+knee_down_offset);
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_down_offset, knee_base+knee_down_offset+MKnee_down_adjustment, knee_base+knee_down_offset-40);
 		WaitReady(ReadyTime());
 		
 		first = first == TRIPOD1 ? TRIPOD2 : TRIPOD1;
