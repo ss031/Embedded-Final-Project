@@ -1011,3 +1011,51 @@ void CSpider::testing(uint8_t Repeat_Num) {
 	}
 	m_bAbort = false;
 }
+	
+void CSpider::dp_testing(uint8_t Repeat_Num) {
+	if (m_bDebugDump)
+	printf("dp_testing \n");
+
+	//New global constants
+	int knee_base = Knee_Down_Base;
+	int hipF_base = HipF_Base;
+	int hipM_base = HipM_Base;
+	int hipB_base = HipB_Base;
+	int ankle_base = Ankle_Base;
+
+	//Walking constants
+	int knee_up_offset = 15;
+	int hip_forward_offset = 18;
+	int ankle_up_offset = -30;
+	int knee_down_offset = -8;
+	
+	//Adjustment constants (servo dependant maybe)
+	int MKnee_down_adjustment = -2;
+	
+	TRIPOD_ID first = TRIPOD2;
+	TRIPOD_ID second = TRIPOD1;
+	
+	int num;
+	for(num=0;num<Repeat_Num*2 && m_bAbort!= true;num++)
+	{
+		
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_up_offset, knee_base+knee_up_offset, knee_base+knee_up_offset);
+		WaitReady(ReadyTime());
+		
+		MoveTripod(first, CSpiderLeg::Hip, hipF_base+hip_forward_offset, hipM_base+hip_forward_offset, hipB_base+hip_forward_offset);
+		MoveTripod(first, CSpiderLeg::Ankle, ankle_base+ankle_up_offset, ankle_base+ankle_up_offset, ankle_base+ankle_up_offset);
+		MoveTripod(second, CSpiderLeg::Knee, knee_base, knee_base, knee_base);
+		MoveTripod(second, CSpiderLeg::Ankle, ankle_base, ankle_base, ankle_base);
+		MoveTripod(second, CSpiderLeg::Hip, hipF_base, hipM_base, hipB_base);
+		WaitReady(ReadyTime());
+		
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_down_offset, knee_base+knee_down_offset+MKnee_down_adjustment, knee_base+knee_down_offset);
+		WaitReady(ReadyTime());
+		
+		first = first == TRIPOD1 ? TRIPOD2 : TRIPOD1;
+		second = second == TRIPOD1 ? TRIPOD2 : TRIPOD1;
+		
+		printf("HKLJHKLJ");
+	}
+	m_bAbort = false;
+}

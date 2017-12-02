@@ -81,6 +81,7 @@ public:
 	
 	void MoveTripodSingleStep(TRIPOD_ID Tripod,CSpiderLeg::JOINT_ID Joint,float AngleF,float AngleM,float AngleB);
 	void testing(uint8_t Repeat_Num);
+	void dp_testing(uint8_t Repeat_Num);
 
 
 };
