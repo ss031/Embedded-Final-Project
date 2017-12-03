@@ -1012,50 +1012,119 @@ void CSpider::testing(uint8_t Repeat_Num) {
 	m_bAbort = false;
 }
 	
-void CSpider::dp_testing(uint8_t Repeat_Num) {
-	if (m_bDebugDump)
-	printf("dp_testing \n");
+void CSpider::silly_walk() {
 
-	//New global constants
+	//New constants
 	int knee_base = Knee_Down_Base;
 	int hipF_base = HipF_Base;
 	int hipM_base = HipM_Base;
 	int hipB_base = HipB_Base;
 	int ankle_base = Ankle_Base;
 
-	//Walking constants
-	int knee_up_offset = 15;
-	int hip_forward_offset = 18;
-	int ankle_up_offset = -30;
-	int knee_down_offset = -8;
+	//Walking constants 
+	//DO NOT CHANGE, If you want differnt values make a new function, quite precise, leg dependant.
+	//Short steps	
+	int Fknee_up = 15; //15 //Positive is up
+	int Fhip_forward = 9; //9 //Positive is forward
+	int Fankle_up = -14; //-14 //Negative is farther
+	int Fknee_down = -4; //-4 //Negative is down
 	
-	//Adjustment constants (servo dependant maybe)
-	int MKnee_down_adjustment = -2;
+	int Mknee_up = 15; //15
+	int Mhip_forward = 14; //14
+	int Mankle_up = -6; //-6
+	int Mknee_down = -4; //-4
 	
-	TRIPOD_ID first = TRIPOD2;
-	TRIPOD_ID second = TRIPOD1;
+	int Bknee_up = 15; //15
+	int Bhip_forward = 17; //17
+	int Bankle_up = 10; //10
+	int Bknee_down = 3; //3
+	
+	TRIPOD_ID first = TRIPOD1;
+	TRIPOD_ID second = TRIPOD2;
 	
 	int num;
-	for(num=0;num<Repeat_Num*2 && m_bAbort!= true;num++)
+	for(num=0;num<2 && m_bAbort!= true;num++)
 	{
+		//Raise first tripods legs into the air
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+Fknee_up, knee_base+Mknee_up, knee_base+Bknee_up);
+		WaitReady(ReadyTime()+5000);
 		
-		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_up_offset+20, knee_base+knee_up_offset+20, knee_base+knee_up_offset+20);
-		WaitReady(ReadyTime());
+		//Happens in the air
+		MoveTripod(first, CSpiderLeg::Hip, hipF_base+Fhip_forward, hipM_base+Mhip_forward, hipB_base+Bhip_forward);
+		MoveTripod(first, CSpiderLeg::Ankle, ankle_base+Fankle_up, ankle_base+Mankle_up, ankle_base+Bankle_up);
 		
-		MoveTripod(first, CSpiderLeg::Hip, hipF_base+hip_forward_offset, hipM_base+hip_forward_offset, hipB_base+hip_forward_offset);
-		MoveTripod(first, CSpiderLeg::Ankle, ankle_base+ankle_up_offset, ankle_base+ankle_up_offset, ankle_base+ankle_up_offset);
+		//Shift legs of second tripod back into starting position (must happen all together)
 		MoveTripod(second, CSpiderLeg::Knee, knee_base, knee_base, knee_base);
 		MoveTripod(second, CSpiderLeg::Ankle, ankle_base, ankle_base, ankle_base);
 		MoveTripod(second, CSpiderLeg::Hip, hipF_base, hipM_base, hipB_base);
-		WaitReady(ReadyTime());
+		WaitReady(ReadyTime()+5000);
 		
-		MoveTripod(first, CSpiderLeg::Knee, knee_base+knee_down_offset, knee_base+knee_down_offset+MKnee_down_adjustment, knee_base+knee_down_offset-40);
-		WaitReady(ReadyTime());
+		//Lower the legs of the first tripod
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+Fknee_down, knee_base+Mknee_down, knee_base+Bknee_down);
+		WaitReady(ReadyTime()+5000);
 		
 		first = first == TRIPOD1 ? TRIPOD2 : TRIPOD1;
 		second = second == TRIPOD1 ? TRIPOD2 : TRIPOD1;
+	}
+	m_bAbort = false;
+}
+
+
+void CSpider::silly_climb() {
+
+	//New constants
+	int knee_base = Knee_Down_Base;
+	int hipF_base = HipF_Base;
+	int hipM_base = HipM_Base;
+	int hipB_base = HipB_Base;
+	int ankle_base = Ankle_Base;
+
+	//Walking constants 
+	//DO NOT CHANGE. If you want differnt values make a new function, quite precise, leg dependant.
+	//"climbing"
+	int Fknee_up = 32; //15 //Positive is up
+	int Fhip_forward = 9; //9 //Positive is forward
+	int Fankle_up = -14; //-14 //Negative is farther
+	int Fknee_down = -4; //-4 //Negative is down
+	
+	int Mknee_up = 32; //15
+	int Mhip_forward = 14; //14
+	int Mankle_up = -6; //-6
+	int Mknee_down = -4; //-4
+	
+	int Bknee_up = 32; //15
+	int Bhip_forward = 17; //17
+	int Bankle_up = 10; //10
+	int Bknee_down = 3; //3
+	
+	TRIPOD_ID first = TRIPOD1;
+	TRIPOD_ID second = TRIPOD2;
+	
+	int num;
+	for(num=0;num<2 && m_bAbort!= true;num++)
+	{
+		//Raise first tripods legs into the air
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+Fknee_up, knee_base+Mknee_up, knee_base+Bknee_up);
+		WaitReady(ReadyTime()+5000);
 		
-		printf("HKLJHKLJ");
+		//Happens in the air
+		MoveTripod(first, CSpiderLeg::Hip, hipF_base+Fhip_forward, hipM_base+Mhip_forward, hipB_base+Bhip_forward);
+		WaitReady(ReadyTime()+5000);
+		MoveTripod(first, CSpiderLeg::Ankle, ankle_base+Fankle_up, ankle_base+Mankle_up, ankle_base+Bankle_up);
+		WaitReady(ReadyTime()+5000);
+		
+		//Shift legs of second tripod back into starting position (must happen all together)
+		MoveTripod(second, CSpiderLeg::Knee, knee_base, knee_base, knee_base);
+		MoveTripod(second, CSpiderLeg::Ankle, ankle_base, ankle_base, ankle_base);
+		MoveTripod(second, CSpiderLeg::Hip, hipF_base, hipM_base, hipB_base);
+		WaitReady(ReadyTime()+5000);
+		
+		//Lower the legs of the first tripod
+		MoveTripod(first, CSpiderLeg::Knee, knee_base+Fknee_down, knee_base+Mknee_down, knee_base+Bknee_down);
+		WaitReady(ReadyTime()+5000);
+		
+		first = first == TRIPOD1 ? TRIPOD2 : TRIPOD1;
+		second = second == TRIPOD1 ? TRIPOD2 : TRIPOD1;
 	}
 	m_bAbort = false;
 }

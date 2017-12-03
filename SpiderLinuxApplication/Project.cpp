@@ -35,19 +35,24 @@ int main(int argc, char *argv[]){
 		if (!spider.Standup())
 			printf("Spider Standup failed\r\n");
 	}
-	spider.SetSpeed(20);
-
+	spider.SetSpeed(50);
+	spider.Reset();
 	//####################################
 	
 	while (true) {
 		
 		if(BUTTON_PIO.GetBUTTON()==0x2) {
 			
-			spider.Reset();
+			//spider.Reset();
 			//uint32_t channel = adc.GetChannel(0);
 			////printf("dist: %d\n", channel);
 			///while (channel < 1000) {
-				spider.dp_testing(10);
+			for (int i = 0; i < 5; i++) {
+				spider.silly_walk();
+			}
+			for (int i = 0; i < 10; i++) {
+				spider.silly_climb();
+			}
 				//channel = adc.GetChannel(0);
 				//printf("dist: %d\n", channel);
 			//}
@@ -56,7 +61,15 @@ int main(int argc, char *argv[]){
 		
 		if (BUTTON_PIO.GetBUTTON()==0x1) {
 			spider.Reset();
-			spider.Fold();
+			/* spider.Fold();
+			
+			while(true) {
+				if (BUTTON_PIO.GetBUTTON()==0x1) {
+					spider.Reset();
+					break;
+				}
+			} */
+			
 		}
 	}
 	
