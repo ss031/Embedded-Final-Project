@@ -39,37 +39,37 @@ int main(int argc, char *argv[]){
 	spider.Reset();
 	//####################################
 	
+	bool reset_pressed_last = false;
 	while (true) {
 		
 		if(BUTTON_PIO.GetBUTTON()==0x2) {
-			
-			//spider.Reset();
-			//uint32_t channel = adc.GetChannel(0);
-			////printf("dist: %d\n", channel);
-			///while (channel < 1000) {
-			for (int i = 0; i < 5; i++) {
+			reset_pressed_last = false;
+			spider.Reset();
+			uint32_t channel = adc.GetChannel(0);
+			printf("dist: %d\n", channel);
+			while (channel < 1100) {
 				spider.silly_walk();
+				channel = adc.GetChannel(0);
+				printf("dist: %d\n", channel);
 			}
-			for (int i = 0; i < 10; i++) {
+			
+			for (int i = 0; i < 10; i++){
 				spider.silly_climb();
 			}
-				//channel = adc.GetChannel(0);
-				//printf("dist: %d\n", channel);
-			//}
+			
 			//spider.Reset();
+			
 		}
 		
 		if (BUTTON_PIO.GetBUTTON()==0x1) {
-			spider.Reset();
-			/* spider.Fold();
-			
-			while(true) {
-				if (BUTTON_PIO.GetBUTTON()==0x1) {
-					spider.Reset();
-					break;
-				}
-			} */
-			
+			if (!reset_pressed_last) {
+				reset_pressed_last = true;
+				spider.Reset();
+			}
+			else {
+				reset_pressed_last = false;
+				spider.Fold();
+			}
 		}
 	}
 	

@@ -1082,17 +1082,17 @@ void CSpider::silly_climb() {
 	//Walking constants 
 	//DO NOT CHANGE. If you want differnt values make a new function, quite precise, leg dependant.
 	//"climbing"
-	int Fknee_up = 32; //15 //Positive is up
+	int Fknee_up = 35; //15 //Positive is up
 	int Fhip_forward = 9; //9 //Positive is forward
 	int Fankle_up = -14; //-14 //Negative is farther
 	int Fknee_down = -4; //-4 //Negative is down
 	
-	int Mknee_up = 32; //15
+	int Mknee_up = 35; //15
 	int Mhip_forward = 14; //14
 	int Mankle_up = -6; //-6
 	int Mknee_down = -4; //-4
 	
-	int Bknee_up = 32; //15
+	int Bknee_up = 35; //15
 	int Bhip_forward = 17; //17
 	int Bankle_up = 10; //10
 	int Bknee_down = 3; //3
